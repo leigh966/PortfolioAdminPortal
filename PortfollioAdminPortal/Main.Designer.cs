@@ -28,12 +28,67 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Main";
+            lstProj = new ListBox();
+            btnDelete = new Button();
+            btnEdit = new Button();
+            btnAdd = new Button();
+            SuspendLayout();
+            // 
+            // lstProj
+            // 
+            lstProj.FormattingEnabled = true;
+            lstProj.Location = new Point(12, 12);
+            lstProj.Name = "lstProj";
+            lstProj.Size = new Size(316, 364);
+            lstProj.TabIndex = 0;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(12, 382);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(94, 29);
+            btnDelete.TabIndex = 1;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnEdit
+            // 
+            btnEdit.Location = new Point(125, 382);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(94, 29);
+            btnEdit.TabIndex = 2;
+            btnEdit.Text = "Edit";
+            btnEdit.UseVisualStyleBackColor = true;
+            // 
+            // btnAdd
+            // 
+            btnAdd.Location = new Point(234, 382);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(94, 29);
+            btnAdd.TabIndex = 3;
+            btnAdd.Text = "Add";
+            btnAdd.UseVisualStyleBackColor = true;
+            // 
+            // Main
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(340, 420);
+            Controls.Add(btnAdd);
+            Controls.Add(btnEdit);
+            Controls.Add(btnDelete);
+            Controls.Add(lstProj);
+            Name = "Main";
+            Text = "Main";
+            Load += Main_Load;
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private ListBox lstProj;
+        private Button btnDelete;
+        private Button btnEdit;
+        private Button btnAdd;
     }
 }

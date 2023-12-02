@@ -28,17 +28,22 @@ namespace PortfollioAdminPortal
                 return;
             }
 
-            Form mainForm = new Main();
+            Form mainForm = new Main(responseString, client);
             Hide();
             mainForm.ShowDialog();
             Close();
-            
+
 
         }
 
         private void btnSub_Click(object sender, EventArgs e)
         {
             sendLoginRequest();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
