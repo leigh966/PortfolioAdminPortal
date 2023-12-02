@@ -22,8 +22,17 @@ namespace PortfollioAdminPortal
 
             var response = await client.PostAsync("http://127.0.0.1:3000/login", content);
             var responseString = await response.Content.ReadAsStringAsync();
-            MessageBox.Show(responseString, response.StatusCode.ToString(), MessageBoxButtons.OK);
+            if (response.StatusCode != System.Net.HttpStatusCode.Created)
+            {
+                MessageBox.Show(responseString, response.StatusCode.ToString(), MessageBoxButtons.OK);
+                return;
+            }
 
+            Form mainForm = new Main();
+            Hide();
+            mainForm.ShowDialog();
+            Close();
+            
 
         }
 
