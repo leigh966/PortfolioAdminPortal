@@ -61,7 +61,7 @@ new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1:3000/projects"))
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if(lstProj.SelectedIndex < 0) 
+            if (lstProj.SelectedIndex < 0)
             {
                 return;
             }
@@ -71,6 +71,27 @@ new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1:3000/projects"))
             mainForm.ShowDialog();
             requestProjects();
             Show();
+        }
+
+        private async void DeleteProject(string id)
+        {
+            using (var requestMessage =
+new HttpRequestMessage(HttpMethod.Delete, "http://127.0.0.1:3000/project/"+id))
+            {
+                requestMessage.Headers.Add("session_id", sessionId);
+                var response = await client.SendAsync(requestMessage);
+
+            }
+            requestProjects();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (lstProj.SelectedIndex >= 0)
+            {
+                DeleteProject(projects[lstProj.SelectedIndex].id);
+            }
+            
         }
     }
 }
