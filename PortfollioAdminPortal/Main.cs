@@ -34,9 +34,9 @@ new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1:3000/projects"))
                 requestMessage.Headers.Add("session_id", sessionId);
                 var response = await client.SendAsync(requestMessage);
                 string jsonText = await response.Content.ReadAsStringAsync();
-
+                lstProj.Items.Clear();
                 List<Project>? projects = JsonSerializer.Deserialize<List<Project>>(jsonText);
-                foreach(Project p in projects)
+                foreach (Project p in projects)
                 {
                     lstProj.Items.Add(p.name);
                 }
@@ -48,6 +48,15 @@ new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1:3000/projects"))
         {
             requestProjects();
 
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Form mainForm = new AlterProject(sessionId, client);
+            Hide();
+            mainForm.ShowDialog();
+            requestProjects();
+            Show();
         }
     }
 }
