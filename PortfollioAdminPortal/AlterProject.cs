@@ -16,12 +16,23 @@ namespace PortfollioAdminPortal
         bool valuesProvided;
         HttpClient client;
         string sessionId;
+        Project? project = null;
+
         public AlterProject(string sessionId, HttpClient client)
         {
             this.sessionId = sessionId;
             this.client = client;
-            valuesProvided = false;
             InitializeComponent();
+        }
+
+        public AlterProject(string sessionId, HttpClient client, Project thisProject) 
+        {
+            project = thisProject;
+            this.sessionId = sessionId;
+            this.client = client;
+            InitializeComponent();
+            txtName.Text = project.name;
+            txtDescription.Text = project.description;
         }
 
         private async void AddProject()
@@ -45,10 +56,32 @@ new HttpRequestMessage(HttpMethod.Post, "http://127.0.0.1:3000/project"))
             Close();
         }
 
+        private async void UpdateProject()
+        {
+            string json = "{\"name\":\"" + txtName.Text + "\",\"description\":\"" + txtDescription.Text + "\"}";
+            using (var requestMessage =
+new HttpRequestMessage(HttpMethod.Put, "http://127.0.0.1:3000/project/"+project.id))
+            {
+                requestMessage.Headers.Add("session_id", sessionId);
+                requestMessage.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.SendAsync(requestMessage);
+                //var response = await client.PostAsync("http://127.0.0.1:3000/project", content);
+                var responseString = await response.Content.ReadAsStringAsync();
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    MessageBox.Show(responseString, response.StatusCode.ToString(), MessageBoxButtons.OK);
+                    return;
+                }
+            }
+
+            Close();
+        }
+
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            if(valuesProvided)
+            if(project != null)
             {
+                UpdateProject();
                 return;
             }
             AddProject();
