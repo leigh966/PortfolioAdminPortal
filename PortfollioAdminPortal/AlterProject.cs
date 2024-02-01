@@ -27,13 +27,11 @@ namespace PortfollioAdminPortal
         private async void AddProject()
         {
             string json = "{\"name\":\""+txtName.Text+"\",\"description\":\""+txtDescription.Text+"\"}";
-            using (var requestMessage =
-new HttpRequestMessage(HttpMethod.Post, "http://127.0.0.1:3000/project"))
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, WebConfig.BACKEND_URL+"/project"))
             {
                 requestMessage.Headers.Add("session_id", sessionId);
                 requestMessage.Content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.SendAsync(requestMessage);
-                //var response = await client.PostAsync("http://127.0.0.1:3000/project", content);
                 var responseString = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode != System.Net.HttpStatusCode.Created)
                 {

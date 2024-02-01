@@ -28,8 +28,7 @@ namespace PortfollioAdminPortal
         private List<Project>? projects = null;
         private async void requestProjects()
         {
-            using (var requestMessage =
-new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1:3000/projects"))
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, WebConfig.BACKEND_URL+"/projects"))
             {
                 requestMessage.Headers.Add("session_id", sessionId);
                 var response = await client.SendAsync(requestMessage);
