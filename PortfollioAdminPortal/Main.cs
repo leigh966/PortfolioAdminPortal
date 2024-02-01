@@ -25,7 +25,7 @@ namespace PortfollioAdminPortal
             this.client = client;
             InitializeComponent();
         }
-
+        private List<Project>? projects = null;
         private async void requestProjects()
         {
             using (var requestMessage =
@@ -35,7 +35,7 @@ new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1:3000/projects"))
                 var response = await client.SendAsync(requestMessage);
                 string jsonText = await response.Content.ReadAsStringAsync();
                 lstProj.Items.Clear();
-                List<Project>? projects = JsonSerializer.Deserialize<List<Project>>(jsonText);
+                projects = JsonSerializer.Deserialize<List<Project>>(jsonText);
                 foreach (Project p in projects)
                 {
                     lstProj.Items.Add(p.name);
@@ -57,6 +57,32 @@ new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1:3000/projects"))
             mainForm.ShowDialog();
             requestProjects();
             Show();
+        }
+
+        private async void DeleteProject()
+        {
+            string url = WebConfig.BACKEND_URL + "/project/" + projects[lstProj.SelectedIndex].id;
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Delete, url))
+            {
+                requestMessage.Headers.Add("session_id", sessionId);
+                var response = await client.SendAsync(requestMessage);
+                var responseString = await response.Content.ReadAsStringAsync();
+                if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
+                {
+                    MessageBox.Show(responseString, response.StatusCode.ToString(), MessageBoxButtons.OK);
+                    return;
+                }
+                projects.RemoveAt(lstProj.SelectedIndex);
+                lstProj.Items.RemoveAt(lstProj.SelectedIndex);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (lstProj.SelectedIndex == -1) return;
+
+            DeleteProject();
+
         }
     }
 }
