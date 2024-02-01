@@ -26,7 +26,7 @@ namespace PortfollioAdminPortal
 
         private async void AddProject()
         {
-            string json = "{\"name\":\""+txtName.Text+"\",\"description\":\""+txtDescription.Text+"\"}";
+            string json = $"{{\"name\":\"{txtName.Text}\",\"description\":\"{txtDescription.Text}\",\"tagline\":\"{txtTagline.Text}\"}}";
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, WebConfig.BACKEND_URL+"/project"))
             {
                 requestMessage.Headers.Add("session_id", sessionId);

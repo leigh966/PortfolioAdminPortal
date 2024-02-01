@@ -33,6 +33,8 @@
             lblName = new Label();
             lblDescription = new Label();
             btnSubmit = new Button();
+            label1 = new Label();
+            txtTagline = new TextBox();
             SuspendLayout();
             // 
             // txtName
@@ -44,11 +46,11 @@
             // 
             // txtDescription
             // 
-            txtDescription.Location = new Point(23, 95);
+            txtDescription.Location = new Point(23, 147);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(254, 171);
-            txtDescription.TabIndex = 1;
+            txtDescription.Size = new Size(254, 206);
+            txtDescription.TabIndex = 2;
             // 
             // lblName
             // 
@@ -62,7 +64,7 @@
             // lblDescription
             // 
             lblDescription.AutoSize = true;
-            lblDescription.Location = new Point(104, 73);
+            lblDescription.Location = new Point(104, 124);
             lblDescription.Name = "lblDescription";
             lblDescription.Size = new Size(85, 20);
             lblDescription.TabIndex = 3;
@@ -70,19 +72,37 @@
             // 
             // btnSubmit
             // 
-            btnSubmit.Location = new Point(104, 276);
+            btnSubmit.Location = new Point(104, 359);
             btnSubmit.Name = "btnSubmit";
             btnSubmit.Size = new Size(94, 29);
-            btnSubmit.TabIndex = 4;
+            btnSubmit.TabIndex = 3;
             btnSubmit.Text = "Submit";
             btnSubmit.UseVisualStyleBackColor = true;
             btnSubmit.Click += btnSubmit_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(113, 71);
+            label1.Name = "label1";
+            label1.Size = new Size(56, 20);
+            label1.TabIndex = 5;
+            label1.Text = "Tagline";
+            // 
+            // txtTagline
+            // 
+            txtTagline.Location = new Point(23, 94);
+            txtTagline.Name = "txtTagline";
+            txtTagline.Size = new Size(254, 27);
+            txtTagline.TabIndex = 1;
             // 
             // AlterProject
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(303, 318);
+            ClientSize = new Size(303, 400);
+            Controls.Add(txtTagline);
+            Controls.Add(label1);
             Controls.Add(btnSubmit);
             Controls.Add(lblDescription);
             Controls.Add(lblName);
@@ -101,5 +121,7 @@
         private Label lblName;
         private Label lblDescription;
         private Button btnSubmit;
+        private Label label1;
+        private TextBox txtTagline;
     }
 }
