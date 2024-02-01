@@ -24,6 +24,34 @@ namespace PortfollioAdminPortal
             InitializeComponent();
         }
 
+        string? id = null;
+        public AlterProject(string sessionId, HttpClient client, Project project) : this(sessionId, client)
+        {
+            txtName.Text = project.name;
+            txtTagline.Text = project.tagline;
+            txtDescription.Text = project.description;
+            id = project.id;
+        }
+
+        private async void UpdateProject()
+        {
+            string json = $"{{\"name\":\"{txtName.Text}\",\"description\":\"{txtDescription.Text}\",\"tagline\":\"{txtTagline.Text}\"}}";
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Put, WebConfig.BACKEND_URL + "/project/"+id))
+            {
+                requestMessage.Headers.Add("session_id", sessionId);
+                requestMessage.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.SendAsync(requestMessage);
+                var responseString = await response.Content.ReadAsStringAsync();
+                if (response.StatusCode != System.Net.HttpStatusCode.Created)
+                {
+                    MessageBox.Show(responseString, response.StatusCode.ToString(), MessageBoxButtons.OK);
+                    return;
+                }
+            }
+
+            Close();
+        }
+
         private async void AddProject()
         {
             string json = $"{{\"name\":\"{txtName.Text}\",\"description\":\"{txtDescription.Text}\",\"tagline\":\"{txtTagline.Text}\"}}";
@@ -47,6 +75,11 @@ namespace PortfollioAdminPortal
         {
             if(valuesProvided)
             {
+                return;
+            }
+            if(id != null)
+            {
+                UpdateProject();
                 return;
             }
             AddProject();

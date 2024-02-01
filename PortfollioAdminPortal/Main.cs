@@ -16,7 +16,7 @@ namespace PortfollioAdminPortal
         private List<Project>? projects = null;
         private async void requestProjects()
         {
-            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, WebConfig.BACKEND_URL+"/projects"))
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, WebConfig.BACKEND_URL + "/projects"))
             {
                 requestMessage.Headers.Add("session_id", sessionId);
                 var response = await client.SendAsync(requestMessage);
@@ -70,6 +70,17 @@ namespace PortfollioAdminPortal
 
             DeleteProject();
 
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (lstProj.SelectedIndex == -1) return;
+
+            Form mainForm = new AlterProject(sessionId, client, projects[lstProj.SelectedIndex]);
+            Hide();
+            mainForm.ShowDialog();
+            requestProjects();
+            Show();
         }
     }
 }
