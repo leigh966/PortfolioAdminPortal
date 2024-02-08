@@ -17,7 +17,7 @@ namespace PortfollioAdminPortal
     {
         HttpClient client;
         string sessionId;
-        string? imagePath = null;
+        string? imagePath = null, aws_filename = null;
         public AlterProject(string sessionId, HttpClient client)
         {
             this.sessionId = sessionId;
@@ -36,11 +36,18 @@ namespace PortfollioAdminPortal
             {
                 pbBanner.ImageLocation = WebConfig.BACKEND_URL + "/image/"+ project.image_filename;
             }
+            aws_filename = project.image_filename;
+        }
+
+        public string GetJson()
+        {
+            
+            return $"{{\"name\":\"{txtName.Text}\",\"description\":\"{txtDescription.Text}\",\"tagline\":\"{txtTagline.Text}\",\"image_filename\":\"{aws_filename}\"}}";
         }
 
         private async void UpdateProject()
         {
-            string json = $"{{\"name\":\"{txtName.Text}\",\"description\":\"{txtDescription.Text}\",\"tagline\":\"{txtTagline.Text}\"}}";
+            string json = GetJson();
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Put, WebConfig.BACKEND_URL + "/project/" + id))
             {
                 requestMessage.Headers.Add("session_id", sessionId);
@@ -60,11 +67,7 @@ namespace PortfollioAdminPortal
         private async void AddProject()
         {
 
-            string json = $"{{\"name\":\"{txtName.Text}\",\"description\":\"{txtDescription.Text}\",\"tagline\":\"{txtTagline.Text}\",\"image_filename\":\"{aws_filename}\"}}";
-            if(aws_filename == null)
-            {
-                json = $"{{\"name\":\"{txtName.Text}\",\"description\":\"{txtDescription.Text}\",\"tagline\":\"{txtTagline.Text}\"}}";
-            }
+            string json = GetJson();
                 using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, WebConfig.BACKEND_URL + "/project"))
             {
                 requestMessage.Headers.Add("session_id", sessionId);
@@ -81,7 +84,7 @@ namespace PortfollioAdminPortal
             Close();
         }
 
-        string? aws_filename = null;
+        
 
         private async void HandleSubmit()
         {
