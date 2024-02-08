@@ -13,7 +13,7 @@ namespace PortfollioAdminPortal
         public string description { get; set; }
         public string last_updated { get; set; }
         public string tagline { get; set; }
-        public string image_filename { get; set; }
+        public string? image_filename { get; set; }
 
     }
 }

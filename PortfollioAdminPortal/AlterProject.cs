@@ -32,6 +32,10 @@ namespace PortfollioAdminPortal
             txtTagline.Text = project.tagline;
             txtDescription.Text = project.description;
             id = project.id;
+            if(project.image_filename != null)
+            {
+                pbBanner.ImageLocation = WebConfig.BACKEND_URL + "/image/"+ project.image_filename;
+            }
         }
 
         private async void UpdateProject()
