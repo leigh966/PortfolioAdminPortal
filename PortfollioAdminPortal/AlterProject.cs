@@ -54,7 +54,7 @@ namespace PortfollioAdminPortal
                 requestMessage.Content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.SendAsync(requestMessage);
                 var responseString = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != System.Net.HttpStatusCode.Created)
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 {
                     MessageBox.Show(responseString, response.StatusCode.ToString(), MessageBoxButtons.OK);
                     return;
