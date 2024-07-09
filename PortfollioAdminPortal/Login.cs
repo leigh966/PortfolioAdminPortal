@@ -20,7 +20,7 @@ namespace PortfollioAdminPortal
 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("http://127.0.0.1:3000/login", content);
+            var response = await client.PostAsync(WebConfig.BACKEND_URL+"/login", content);
             var responseString = await response.Content.ReadAsStringAsync();
             if (response.StatusCode != System.Net.HttpStatusCode.Created)
             {

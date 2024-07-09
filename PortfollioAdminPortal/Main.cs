@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Web;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace PortfollioAdminPortal
 {
@@ -25,11 +13,10 @@ namespace PortfollioAdminPortal
             this.client = client;
             InitializeComponent();
         }
-        List<Project>? projects;
+        private List<Project>? projects = null;
         private async void requestProjects()
         {
-            using (var requestMessage =
-new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1:3000/projects"))
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, WebConfig.BACKEND_URL + "/projects"))
             {
                 requestMessage.Headers.Add("session_id", sessionId);
                 var response = await client.SendAsync(requestMessage);
@@ -59,39 +46,41 @@ new HttpRequestMessage(HttpMethod.Get, "http://127.0.0.1:3000/projects"))
             Show();
         }
 
+        private async void DeleteProject()
+        {
+            string url = WebConfig.BACKEND_URL + "/project/" + projects[lstProj.SelectedIndex].id;
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Delete, url))
+            {
+                requestMessage.Headers.Add("session_id", sessionId);
+                var response = await client.SendAsync(requestMessage);
+                var responseString = await response.Content.ReadAsStringAsync();
+                if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
+                {
+                    MessageBox.Show(responseString, response.StatusCode.ToString(), MessageBoxButtons.OK);
+                    return;
+                }
+                projects.RemoveAt(lstProj.SelectedIndex);
+                lstProj.Items.RemoveAt(lstProj.SelectedIndex);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (lstProj.SelectedIndex == -1) return;
+
+            DeleteProject();
+
+        }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (lstProj.SelectedIndex < 0)
-            {
-                return;
-            }
+            if (lstProj.SelectedIndex == -1) return;
 
             Form mainForm = new AlterProject(sessionId, client, projects[lstProj.SelectedIndex]);
             Hide();
             mainForm.ShowDialog();
             requestProjects();
             Show();
-        }
-
-        private async void DeleteProject(string id)
-        {
-            using (var requestMessage =
-new HttpRequestMessage(HttpMethod.Delete, "http://127.0.0.1:3000/project/"+id))
-            {
-                requestMessage.Headers.Add("session_id", sessionId);
-                var response = await client.SendAsync(requestMessage);
-
-            }
-            requestProjects();
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (lstProj.SelectedIndex >= 0)
-            {
-                DeleteProject(projects[lstProj.SelectedIndex].id);
-            }
-            
         }
     }
 }
