@@ -8,6 +8,6 @@ namespace PortfollioAdminPortal
 {
     public static class WebConfig
     {
-        public const string BACKEND_URL = "http://127.0.0.1:3000";
+        public const string BACKEND_URL = "http://127.0.0.1:3000"; // change this to the url of your backend
     }
 }
