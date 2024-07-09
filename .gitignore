@@ -6,3 +6,4 @@
 /PortfollioAdminPortal/bin/Debug/net8.0-windows
 /PortfollioAdminPortal/obj
 /.vs/*
+/PortfollioAdminPortal/WebConfig.cs
