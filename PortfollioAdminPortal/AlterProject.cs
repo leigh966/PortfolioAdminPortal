@@ -34,7 +34,7 @@ namespace PortfollioAdminPortal
             id = project.id;
             if(project.image_filename != null)
             {
-                pbBanner.ImageLocation = WebConfig.BACKEND_URL + "/image/"+ project.image_filename;
+                pbBanner.ImageLocation = WebConfig.BACKEND_URL + "/"+ project.image_filename;
             }
             aws_filename = project.image_filename;
         }
