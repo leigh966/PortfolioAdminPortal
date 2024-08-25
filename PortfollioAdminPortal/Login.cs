@@ -28,7 +28,7 @@ namespace PortfollioAdminPortal
                 return;
             }
 
-            Form mainForm = new ProjectsMenu(responseString, client);
+            Form mainForm = new MainMenu(responseString, client);
             Hide();
             mainForm.ShowDialog();
             Close();
