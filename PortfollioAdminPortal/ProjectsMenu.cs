@@ -2,12 +2,12 @@
 
 namespace PortfollioAdminPortal
 {
-    public partial class Main : Form
+    public partial class ProjectsMenu : Form
     {
         private readonly HttpClient client;
         private string sessionId;
 
-        public Main(string sessionId, HttpClient client)
+        public ProjectsMenu(string sessionId, HttpClient client)
         {
             this.sessionId = sessionId;
             this.client = client;

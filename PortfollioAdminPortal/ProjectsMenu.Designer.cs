@@ -1,6 +1,6 @@
 ﻿namespace PortfollioAdminPortal
 {
-    partial class Main
+    partial class ProjectsMenu
     {
         /// <summary>
         /// Required designer variable.
