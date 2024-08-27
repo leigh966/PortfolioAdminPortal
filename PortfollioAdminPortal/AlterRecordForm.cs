@@ -2,7 +2,7 @@
 
 namespace PortfollioAdminPortal
 {
-    public abstract partial class AlterRecordForm<T> : Form where T : IServerEntity
+    public abstract partial class AlterRecordForm<T> : Form where T : IServerEntity, new()
     {
 
 
@@ -35,7 +35,7 @@ namespace PortfollioAdminPortal
         private async void UpdateRecord()
         {
             string json = GetJson();
-            using (var requestMessage = new HttpRequestMessage(HttpMethod.Put, new Project().EndpointRoute + id))
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Put, new T().EndpointRoute + id))
             {
                 requestMessage.Headers.Add("session_id", sessionId);
                 requestMessage.Content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -55,7 +55,7 @@ namespace PortfollioAdminPortal
         {
 
             string json = GetJson();
-            using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, new Project().EndpointRoute))
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, new T().EndpointRoute))
             {
                 requestMessage.Headers.Add("session_id", sessionId);
                 requestMessage.Content = new StringContent(json, Encoding.UTF8, "application/json");

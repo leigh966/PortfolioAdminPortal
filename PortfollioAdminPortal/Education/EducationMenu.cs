@@ -16,12 +16,19 @@ namespace PortfollioAdminPortal
 
         protected override void btnAdd_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            AddEntity(new AlterEducation(sessionId, client));
         }
 
         protected override void btnEdit_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
+            if (lstEntities.SelectedIndex == -1) return;
+            Education selectedRecord = records[lstEntities.SelectedIndex];
+            Form mainForm = new AlterEducation(sessionId, client, selectedRecord);
+            Hide();
+            mainForm.ShowDialog();
+            requestRecords();
+            Show();
         }
     }
 }

@@ -1,13 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="AlterProject.cs">
+    <Compile Update="Education\AlterEducation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Projects\AlterProject.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="AlterRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="EducationMenu.cs">
+    <Compile Update="Education\EducationMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="EntitiesMenu.cs">
@@ -19,7 +22,7 @@
     <Compile Update="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ProjectsMenu.cs">
+    <Compile Update="Projects\ProjectsMenu.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

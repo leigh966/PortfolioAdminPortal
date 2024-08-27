@@ -29,7 +29,7 @@ namespace PortfollioAdminPortal
 
         public override string GetJson()
         {
-            return "{\"school\":" + school + "\",\"course\":" + course + "\",\"start_date\":" + start_date + "\",\"end_date\":" + end_date + "\"}";
+            return "{\"school\":\"" + school + "\",\"course\":\"" + course + "\",\"start_date\":\"" + start_date + "\",\"end_date\":\"" + end_date + "\"}";
         }
         
 
