@@ -11,5 +11,7 @@ namespace PortfollioAdminPortal
         string DisplayText { get; }
         public string EndpointRoute { get; }
         public string id { get; set; }
+
+        public string GetJson();
     }
 }

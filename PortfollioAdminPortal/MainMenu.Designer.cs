@@ -55,13 +55,13 @@
             // 
             // btnEducation
             // 
-            btnEducation.Enabled = false;
             btnEducation.Location = new Point(12, 82);
             btnEducation.Name = "btnEducation";
             btnEducation.Size = new Size(146, 29);
             btnEducation.TabIndex = 2;
             btnEducation.Text = "Education";
             btnEducation.UseVisualStyleBackColor = true;
+            btnEducation.Click += btnEducation_Click;
             // 
             // MainMenu
             // 

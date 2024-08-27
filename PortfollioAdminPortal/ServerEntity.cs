@@ -13,6 +13,7 @@ namespace PortfollioAdminPortal
 
         public abstract string EndpointRoute { get; }
 
+        public abstract string GetJson();
 
         public ServerEntity(string id)
         {

@@ -50,11 +50,12 @@ namespace PortfollioAdminPortal
 
         }
 
-        protected void btnAdd_Click(object sender, EventArgs e)
+        protected abstract void btnAdd_Click(object sender, EventArgs e);
+
+        protected void AddEntity(Form newForm)
         {
-            Form mainForm = new AlterProject(sessionId, client);
             Hide();
-            mainForm.ShowDialog();
+            newForm.ShowDialog();
             requestRecords();
             Show();
         }

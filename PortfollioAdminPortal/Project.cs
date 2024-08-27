@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PortfollioAdminPortal
 {
@@ -28,6 +29,15 @@ namespace PortfollioAdminPortal
             this.image_filename = image_filename;
         }
 
+        public Project(string name, string description, string last_updated, string tagline, string? image_filename) : base("-1")
+        {
+            this.name = name;
+            this.description = description;
+            this.last_updated = last_updated;
+            this.tagline = tagline;
+            this.image_filename = image_filename;
+        }
+
         public override string DisplayText
         {
             get { return this.name; }
@@ -39,6 +49,12 @@ namespace PortfollioAdminPortal
         public string tagline { get; set; }
         public string? image_filename { get; set; }
 
+
+        public override string GetJson()
+        {
+            return $"{{\"name\":\"{name}\",\"description\":\"{description}\",\"tagline\":\"{tagline}\",\"image_filename\":\"{image_filename}\"}}";
+        }
+        
 
 
     }

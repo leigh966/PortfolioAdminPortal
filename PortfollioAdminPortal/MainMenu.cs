@@ -26,5 +26,11 @@ namespace PortfollioAdminPortal
             Form newForm = new ProjectsMenu(sessionId, client);
             newForm.ShowDialog();
         }
+
+        private void btnEducation_Click(object sender, EventArgs e)
+        {
+            Form newForm = new EducationMenu(sessionId, client);
+            newForm.ShowDialog();
+        }
     }
 }

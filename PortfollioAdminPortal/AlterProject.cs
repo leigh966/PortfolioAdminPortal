@@ -10,99 +10,36 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace PortfollioAdminPortal
 {
-    public partial class AlterProject : Form
+    public partial class AlterProject : AlterRecordForm<Project>
     {
-        HttpClient client;
-        string sessionId;
         string? imagePath = null, aws_filename = null;
-        public AlterProject(string sessionId, HttpClient client)
+
+        public AlterProject(string sessionId, HttpClient client) : base(sessionId, client)
         {
-            this.sessionId = sessionId;
-            this.client = client;
-            InitializeComponent();
+            if (txtName is null) InitializeComponent();
         }
 
-        string? id = null;
-        public AlterProject(string sessionId, HttpClient client, Project project) : this(sessionId, client)
+        public AlterProject(string sessionId, HttpClient client, Project project) : base(sessionId, client, project)
         {
-            txtName.Text = project.name;
-            txtTagline.Text = project.tagline;
-            txtDescription.Text = project.description;
-            id = project.id;
-            if(project.image_filename != null)
+            if (txtName is null) InitializeComponent();
+        }
+
+        protected override void UnpackEntity(Project entity)
+        {
+            if(txtName is null) InitializeComponent();
+            txtName.Text = entity.name;
+            txtTagline.Text = entity.tagline;
+            txtDescription.Text = entity.description;
+            id = entity.id;
+            if (entity.image_filename != null)
             {
-                pbBanner.ImageLocation = WebConfig.BACKEND_URL + "/"+ project.image_filename;
+                pbBanner.ImageLocation = WebConfig.BACKEND_URL + "/" + entity.image_filename;
             }
-            aws_filename = project.image_filename;
-        }
-
-        public string GetJson()
-        {
-            
-            return $"{{\"name\":\"{txtName.Text}\",\"description\":\"{txtDescription.Text}\",\"tagline\":\"{txtTagline.Text}\",\"image_filename\":\"{aws_filename}\"}}";
-        }
-
-        private async void UpdateProject()
-        {
-            string json = GetJson();
-            using (var requestMessage = new HttpRequestMessage(HttpMethod.Put, new Project().EndpointRoute+id))
-            {
-                requestMessage.Headers.Add("session_id", sessionId);
-                requestMessage.Content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await client.SendAsync(requestMessage);
-                var responseString = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    MessageBox.Show(responseString, response.StatusCode.ToString(), MessageBoxButtons.OK);
-                    return;
-                }
-            }
-
-            Close();
-        }
-
-        private async void AddProject()
-        {
-
-            string json = GetJson();
-                using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, WebConfig.BACKEND_URL + "/project"))
-            {
-                requestMessage.Headers.Add("session_id", sessionId);
-                requestMessage.Content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await client.SendAsync(requestMessage);
-                var responseString = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != System.Net.HttpStatusCode.Created)
-                {
-                    MessageBox.Show(responseString, response.StatusCode.ToString(), MessageBoxButtons.OK);
-                    return;
-                }
-            }
-
-            Close();
-        }
-
-        
-
-        private async void HandleSubmit()
-        {
-            if (imagePath != null)
-            {
-                aws_filename = await UploadImage();
-            }
-            if (id != null)
-            {
-                UpdateProject();
-                return;
-            }
-            AddProject();
-        }
-
-        private void btnSubmit_Click(object sender, EventArgs e)
-        {
-            HandleSubmit();
+            aws_filename = entity.image_filename;
         }
 
         private async Task<string> UploadImage()
@@ -123,6 +60,15 @@ namespace PortfollioAdminPortal
 
         }
 
+        protected override async void HandleSubmit()
+        {
+            if (imagePath != null)
+            {
+                aws_filename = await UploadImage();
+            }
+            base.HandleSubmit();
+        }
+
         private void btnBanner_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -136,6 +82,16 @@ namespace PortfollioAdminPortal
                     pbBanner.ImageLocation = imagePath;
                 }
             }
+        }
+
+        protected override Project PackEntity()
+        {
+            return new Project(txtName.Text, txtDescription.Text, DateTime.Now.ToString(),txtTagline.Text, aws_filename);
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            HandleSubmit();
         }
     }
 }

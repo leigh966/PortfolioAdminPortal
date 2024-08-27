@@ -4,6 +4,12 @@
     <Compile Update="AlterProject.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="AlterRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EducationMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="EntitiesMenu.cs">
       <SubType>Form</SubType>
     </Compile>

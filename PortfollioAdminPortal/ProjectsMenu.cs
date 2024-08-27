@@ -19,5 +19,13 @@ namespace PortfollioAdminPortal
                 Show();
             
         }
+
+        protected override void btnAdd_Click(object sender, EventArgs e)
+        {
+            AddEntity( new AlterProject(sessionId, client));
+        }
+                    
+
     }
 }
+

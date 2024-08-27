@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            btnSubmit = new Button();
             txtName = new TextBox();
             txtDescription = new TextBox();
             lblName = new Label();
             lblDescription = new Label();
-            btnSubmit = new Button();
             label1 = new Label();
             txtTagline = new TextBox();
             btnBanner = new Button();
@@ -72,16 +72,6 @@
             lblDescription.Size = new Size(85, 20);
             lblDescription.TabIndex = 3;
             lblDescription.Text = "Description";
-            // 
-            // btnSubmit
-            // 
-            btnSubmit.Location = new Point(161, 520);
-            btnSubmit.Name = "btnSubmit";
-            btnSubmit.Size = new Size(94, 29);
-            btnSubmit.TabIndex = 3;
-            btnSubmit.Text = "Submit";
-            btnSubmit.UseVisualStyleBackColor = true;
-            btnSubmit.Click += btnSubmit_Click;
             // 
             // label1
             // 
@@ -127,17 +117,27 @@
             Controls.Add(btnBanner);
             Controls.Add(txtTagline);
             Controls.Add(label1);
-            Controls.Add(btnSubmit);
             Controls.Add(lblDescription);
             Controls.Add(lblName);
             Controls.Add(txtDescription);
             Controls.Add(txtName);
             Controls.Add(pbBanner);
+            Controls.Add(btnSubmit);
             Name = "AlterProject";
             Text = "AlterProject";
             ((System.ComponentModel.ISupportInitialize)pbBanner).EndInit();
             ResumeLayout(false);
             PerformLayout();
+            // 
+            // btnSubmit
+            // 
+            btnSubmit.Location = new Point(161, 520);
+            btnSubmit.Name = "btnSubmit";
+            btnSubmit.Size = new Size(94, 29);
+            btnSubmit.TabIndex = 3;
+            btnSubmit.Text = "Submit";
+            btnSubmit.UseVisualStyleBackColor = true;
+            btnSubmit.Click += btnSubmit_Click;
         }
 
         #endregion
@@ -146,10 +146,10 @@
         private TextBox txtDescription;
         private Label lblName;
         private Label lblDescription;
-        private Button btnSubmit;
         private Label label1;
         private TextBox txtTagline;
         private Button btnBanner;
         private PictureBox pbBanner;
+        private Button btnSubmit;
     }
 }
