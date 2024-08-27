@@ -1,6 +1,6 @@
 ﻿namespace PortfollioAdminPortal
 {
-    partial class ProjectsMenu
+    abstract partial class EntitiesMenu<T>
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lstProj = new ListBox();
+            lstEntities = new ListBox();
             btnDelete = new Button();
             btnEdit = new Button();
             btnAdd = new Button();
@@ -36,11 +36,11 @@
             // 
             // lstProj
             // 
-            lstProj.FormattingEnabled = true;
-            lstProj.Location = new Point(12, 12);
-            lstProj.Name = "lstProj";
-            lstProj.Size = new Size(316, 364);
-            lstProj.TabIndex = 0;
+            lstEntities.FormattingEnabled = true;
+            lstEntities.Location = new Point(12, 12);
+            lstEntities.Name = "lstProj";
+            lstEntities.Size = new Size(316, 364);
+            lstEntities.TabIndex = 0;
             // 
             // btnDelete
             // 
@@ -80,7 +80,7 @@
             Controls.Add(btnAdd);
             Controls.Add(btnEdit);
             Controls.Add(btnDelete);
-            Controls.Add(lstProj);
+            Controls.Add(lstEntities);
             Name = "Main";
             Text = "Main";
             Load += Main_Load;
@@ -89,7 +89,7 @@
 
         #endregion
 
-        private ListBox lstProj;
+        protected ListBox lstEntities;
         private Button btnDelete;
         private Button btnEdit;
         private Button btnAdd;

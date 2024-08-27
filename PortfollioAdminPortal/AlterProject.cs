@@ -48,7 +48,7 @@ namespace PortfollioAdminPortal
         private async void UpdateProject()
         {
             string json = GetJson();
-            using (var requestMessage = new HttpRequestMessage(HttpMethod.Put, WebConfig.BACKEND_URL + "/project/" + id))
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Put, new Project().EndpointRoute+id))
             {
                 requestMessage.Headers.Add("session_id", sessionId);
                 requestMessage.Content = new StringContent(json, Encoding.UTF8, "application/json");
