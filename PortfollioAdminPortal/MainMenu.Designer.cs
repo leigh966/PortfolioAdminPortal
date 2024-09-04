@@ -45,13 +45,13 @@
             // 
             // btnEmployment
             // 
-            btnEmployment.Enabled = false;
             btnEmployment.Location = new Point(12, 47);
             btnEmployment.Name = "btnEmployment";
             btnEmployment.Size = new Size(146, 29);
             btnEmployment.TabIndex = 1;
             btnEmployment.Text = "Employment";
             btnEmployment.UseVisualStyleBackColor = true;
+            btnEmployment.Click += btnEmployment_Click;
             // 
             // btnEducation
             // 

@@ -8,4 +8,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Update="Employment\AlterEmployment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Employment\EmploymentMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>
