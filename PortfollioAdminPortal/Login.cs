@@ -20,7 +20,7 @@ namespace PortfollioAdminPortal
 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync(WebConfig.BACKEND_URL+"/login", content);
+            var response = await client.PostAsync(WebConfig.BACKEND_URL + "/login", content);
             var responseString = await response.Content.ReadAsStringAsync();
             if (response.StatusCode != System.Net.HttpStatusCode.Created)
             {
@@ -44,6 +44,14 @@ namespace PortfollioAdminPortal
         private void Login_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void onKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                sendLoginRequest();
+            }
         }
     }
 }

@@ -52,6 +52,7 @@
             txtPass.TabIndex = 1;
             txtPass.TextAlign = HorizontalAlignment.Center;
             txtPass.UseSystemPasswordChar = true;
+            txtPass.KeyDown += onKeyDown;
             // 
             // txtVerCode
             // 
@@ -60,6 +61,7 @@
             txtVerCode.Size = new Size(223, 27);
             txtVerCode.TabIndex = 2;
             txtVerCode.TextAlign = HorizontalAlignment.Center;
+            txtVerCode.KeyDown += onKeyDown;
             // 
             // lblVerCode
             // 
@@ -93,6 +95,7 @@
             Name = "Login";
             Text = "Login";
             Load += Login_Load;
+            KeyDown += onKeyDown;
             ResumeLayout(false);
             PerformLayout();
         }
