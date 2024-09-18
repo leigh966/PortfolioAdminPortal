@@ -7,9 +7,10 @@ namespace PortfollioAdminPortal
 {
     public partial class Login : Form
     {
-        private static readonly HttpClient client = new HttpClient();
-        public Login()
+        HttpClient client;
+        public Login(HttpClient client)
         {
+            this.client = client;
             InitializeComponent();
         }
 
