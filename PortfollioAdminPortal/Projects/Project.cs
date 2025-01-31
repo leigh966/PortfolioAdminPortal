@@ -52,7 +52,7 @@ namespace PortfollioAdminPortal
 
         public override string GetJson()
         {
-            return $"{{\"name\":\"{name}\",\"description\":\"{description}\",\"tagline\":\"{tagline}\",\"image_filename\":\"{image_filename}\"}}";
+            return $"{{\"name\":\"{name}\",\"description\":\"{description.Replace("\r\n", "<br/>")}\",\"tagline\":\"{tagline}\",\"image_filename\":\"{image_filename}\"}}";
         }
         
 

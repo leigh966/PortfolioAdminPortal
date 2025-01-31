@@ -33,7 +33,7 @@ namespace PortfollioAdminPortal
             if(txtName is null) InitializeComponent();
             txtName.Text = entity.name;
             txtTagline.Text = entity.tagline;
-            txtDescription.Text = entity.description;
+            txtDescription.Text = entity.description.Replace("<br/>", "\r\n");
             id = entity.id;
             if (entity.image_filename != null)
             {
