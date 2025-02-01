@@ -1,4 +1,6 @@
-﻿namespace PortfollioAdminPortal
+﻿using System.Windows.Forms;
+
+namespace PortfollioAdminPortal
 {
     partial class AlterProject
     {
@@ -20,6 +22,29 @@
             base.Dispose(disposing);
         }
 
+        private void AddFromFile(object sender, EventArgs e)
+        {
+            int size = -1;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Text Files (*.txt)|*.txt|Markdown Files (*.md)|*.md";
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                string file = openFileDialog1.FileName;
+                try
+                {
+                    string text = File.ReadAllText(file);
+                    size = text.Length;
+                    txtDescription.Text = text;
+                }
+                catch (IOException)
+                {
+                }
+            }
+            Console.WriteLine(size); // <-- Shows file size in debugging mode.
+            Console.WriteLine(result); // <-- For debugging use.
+        }
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -37,6 +62,7 @@
             txtTagline = new TextBox();
             btnBanner = new Button();
             pbBanner = new PictureBox();
+            btnAddFromFile = new Button();
             ((System.ComponentModel.ISupportInitialize)pbBanner).BeginInit();
             SuspendLayout();
             // 
@@ -49,7 +75,7 @@
             // 
             // txtDescription
             // 
-            txtDescription.Location = new Point(23, 308);
+            txtDescription.Location = new Point(23, 318);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new Size(386, 206);
@@ -64,10 +90,21 @@
             lblName.TabIndex = 2;
             lblName.Text = "Name";
             // 
+            // btnAddFromFile
+            // 
+            btnAddFromFile.Location = new Point(250, 285);
+            btnAddFromFile.Padding = new Padding(0, 0, 0, 0);
+            btnAddFromFile.Name = "btnSubmit";
+            btnAddFromFile.Size = new Size(30, 30);
+            btnAddFromFile.TabIndex = 3;
+            btnAddFromFile.Text = "+";
+            btnAddFromFile.UseVisualStyleBackColor = true;
+            btnAddFromFile.Click += AddFromFile;
+            // 
             // lblDescription
             // 
             lblDescription.AutoSize = true;
-            lblDescription.Location = new Point(161, 285);
+            lblDescription.Location = new Point(161, 295);
             lblDescription.Name = "lblDescription";
             lblDescription.Size = new Size(85, 20);
             lblDescription.TabIndex = 3;
@@ -123,6 +160,7 @@
             Controls.Add(txtName);
             Controls.Add(pbBanner);
             Controls.Add(btnSubmit);
+            Controls.Add(btnAddFromFile);
             Name = "AlterProject";
             Text = "AlterProject";
             ((System.ComponentModel.ISupportInitialize)pbBanner).EndInit();
@@ -131,7 +169,7 @@
             // 
             // btnSubmit
             // 
-            btnSubmit.Location = new Point(161, 520);
+            btnSubmit.Location = new Point(161, 530);
             btnSubmit.Name = "btnSubmit";
             btnSubmit.Size = new Size(94, 29);
             btnSubmit.TabIndex = 3;
@@ -148,7 +186,7 @@
         private Label lblDescription;
         private Label label1;
         private TextBox txtTagline;
-        private Button btnBanner;
+        private Button btnBanner, btnAddFromFile;
         private PictureBox pbBanner;
         private Button btnSubmit;
     }
